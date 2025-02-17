@@ -3,24 +3,18 @@
 @tailwind utilities;
 
 
-.custom-shape-divider-bottom-1736724762 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+.swiper {
+  width: 100%;
+  height: 100%;
 }
 
-.custom-shape-divider-bottom-1736724762 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 200px;
-    transform: rotateY(180deg);
-}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  /* background: #fff; */
 
-.custom-shape-divider-bottom-1736724762 .shape-fill {
-    fill: #FFFFFF;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
