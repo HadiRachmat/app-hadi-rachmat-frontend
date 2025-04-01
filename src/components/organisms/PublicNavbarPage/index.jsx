@@ -41,7 +41,7 @@ const NavList = ({ children, isCurrent = false, icons: Icon }) => (
 NavList.propTypes = {
   children: propTypes.node.isRequired,
   isCurrent: propTypes.bool,
-  icons: propTypes.node,
+  icons: propTypes.elementType,
 };
 
 const PublicNavbarPage = () => {

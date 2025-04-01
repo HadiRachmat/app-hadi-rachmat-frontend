@@ -7,6 +7,17 @@ const getAllServices = async () => {
   const request = await API.get(uri);
   return request.data;
 };
+const getSpesificData = async () => {
+  let uri = `/api/admin/services/data`;
+  const request = await API.get(uri);
+  return request.data;
+};
+
+const getFilteredData = async () => {
+  let uri = `/api/admin/services/filter`;
+  const request = await API.get(uri);
+  return request.data;
+};
 
 const getByIdServices = async () => {
   let uri = `/api/admin/services/:id`;
@@ -32,4 +43,4 @@ const removeServices = async () => {
   return request;
 };
 
-export { getAllServices, getByIdServices, createServices, updateServices, removeServices };
+export { getAllServices, getSpesificData, getFilteredData, getByIdServices, createServices, updateServices, removeServices };

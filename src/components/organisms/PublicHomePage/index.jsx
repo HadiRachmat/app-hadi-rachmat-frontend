@@ -44,7 +44,6 @@ const PublicHomePage = () => {
     const fetchHome = async () => {
       try {
         const response = await getAllHome();
-        console.log("Data Dari API Backend:", response.data); // Debugging
 
         // Ambil data yang benar dari response
         const homeData = response?.data?.home || [];
@@ -70,12 +69,12 @@ const PublicHomePage = () => {
   return (
     <>
       {home.map((home) => (
-        <header key={home.id} className="lg:grid lg:grid-cols-2 h-screen">
-          <div className="lg:my-auto mx-2 sm:mx-24 lg:text-left text-center my-5">
+        <header key={home.id} className="container lg:grid lg:grid-cols-2 gap-24 min-h-screen mx-auto">
+          <div className="lg:my-auto mx-2 sm:mx-10 lg:text-left text-center my-5">
             <h3 className="text-2xl font-normal py-4"> Hallo Everyone...</h3>
             <div>
-              <HeaderName> {home.title} </HeaderName>
               <HeaderName> {home.description} </HeaderName>
+              <HeaderName> {home.title} </HeaderName>
             </div>
             <p className="py-10 text-xl tracking-wider">
               Hi, I am a programmer with expertise in React.js and Node.js. I
@@ -90,7 +89,7 @@ const PublicHomePage = () => {
           </div>
           {/* <div className='bg-fit bg-center bg-no-repeat' style={{backgroundImage:`url(${image})`}}> */}
           <div
-            className="bg-cover bg-top lg:w-[500px] lg:h-[500px] sm:w-[350px] sm:h-[350px] w-[350px] h-[350px] my-10 lg:my-auto mx-auto rounded-full shadow-xl shadow-black"
+            className="bg-cover bg-top lg:w-[500px] lg:h-[500px] sm:w-[350px] sm:h-[350px] w-[350px] h-[350px] my-10 lg:my-auto mx-auto   rounded-full shadow-xl shadow-black"
             style={{
               backgroundImage: `url(${import.meta.env.VITE_APP_API_BASE_URL}${
                 home.attachment?.file_path
