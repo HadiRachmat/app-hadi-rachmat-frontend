@@ -8,7 +8,7 @@ const Button = ({
 }) => {
   return (
     <a href={href}>
-      <button   
+      <button
         className={`${className} ${
           isCurrent
             ? "bg-blue-600 px-10 py-3 rounded-full text-white font-medium uppercase tracking-wider hover:bg-orange-500 hover:text-black delay-300 duration-500"
