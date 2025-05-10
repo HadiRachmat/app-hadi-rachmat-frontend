@@ -39,7 +39,6 @@ const PublicServicePage = () => {
     const fetchServices = async () => {
       try {
         const response = await getSpesificData();
-        console.log(response.data);
 
         const servicesData = response?.data || [];
         const attahments = Array.isArray(response?.data?.attachments)
@@ -54,8 +53,7 @@ const PublicServicePage = () => {
         }));
         setServices(getAllData);
       } catch (e) {
-        console.log("Gagal mengambil data services", e);
-        alert("Couldn't fetch");
+        window.alert("Gagal mengambil data services", e);
       }
     };
     fetchServices();

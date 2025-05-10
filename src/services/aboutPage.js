@@ -14,9 +14,9 @@ const getByIdAbout = async () => {
   return request;
 };
 
-const createAbout = async () => {
-  let uri = `/api/admin/about`;
-  const request = await API.post(uri);
+const createAbout = async (formData, config ={}) => {
+  let uri = `/api/admin/about/create`;
+  const request = await API.post(uri, formData,config);
   return request;
 };
 

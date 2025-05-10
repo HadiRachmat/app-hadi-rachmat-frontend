@@ -4,6 +4,7 @@ import {
   IoLogoInstagram,
   IoLogoWhatsapp,
   IoMailOutline,
+  
 } from "react-icons/io5";
 
 const FooterList = ({ links, className = "", isCurrent = false }) => {

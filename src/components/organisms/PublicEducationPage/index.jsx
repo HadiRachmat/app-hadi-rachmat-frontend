@@ -26,10 +26,8 @@ const PublicEducationPage = () => {
     const fetchExperiance = async () => {
       try {
         const response = await getAllExperiance();
-        console.log(response);
 
         const experianceData = response?.data?.experiences || [];
-        console.log(experianceData);
 
         const getAllData = experianceData.map((experiences) => ({
           ...experiences,
@@ -37,7 +35,7 @@ const PublicEducationPage = () => {
 
         setExperiance(getAllData);
       } catch (e) {
-        console.log("Gagal mengambil data experiences", e);
+        window.alert(e, " Gagal Memuat Data ");
       }
     };
     fetchExperiance();

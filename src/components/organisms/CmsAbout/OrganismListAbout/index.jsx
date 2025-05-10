@@ -51,7 +51,7 @@ const OrganismListAbout = () => {
 
         setAbout(getAllAboutData);
       } catch (error) {
-        console.log(error, "Gagal Memuat Data About");
+        window.alert(error, "Gagal Memuat Data")
       }
     };
     fetchDataAbout();
@@ -66,7 +66,7 @@ const OrganismListAbout = () => {
         <Table
           columns={columns}
           dataSource={dataAbout}
-          pagination={{ pageSize: 5 }}
+          pagination={{ pageSize: 10 }}
           bordered
         />
       </div>

@@ -56,8 +56,8 @@ const OrganismListExperiance = () => {
         }));
 
         setExperiances(resultData);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        window.alert(e," Galal Memuat Data")
       }
     };
     fetchDataExperiance();

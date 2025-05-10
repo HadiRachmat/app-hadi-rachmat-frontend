@@ -76,7 +76,7 @@ const PublicFavoritTools = () => {
 
         setServices(getAllData);
       } catch (e) {
-        console.log("Gagal mengambil data services", e);
+        window.alert("Gagal mengambil data services", e);
       }
     };
     

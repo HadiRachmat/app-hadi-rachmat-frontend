@@ -18,7 +18,13 @@ const MoleculesTitle = () => {
     }
     /**( title update page is not yet to do) */
   };
-  return <>{generatePageTitle()}</>;
+  return (
+    <>
+    <div className="p-5 py-7">
+      <h1 className="font-bold text-3xl uppercase">{generatePageTitle()} Management</h1>
+    </div>
+    </>
+  );
 };
 
 export default MoleculesTitle;

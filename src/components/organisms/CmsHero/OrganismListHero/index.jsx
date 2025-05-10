@@ -47,7 +47,7 @@ const OrganismListHero = () => {
 
         setDataHero(getAllData);
       } catch (e) {
-        console.log(e, "Gagal Memuat Data");
+        window.alert(e, "Gagal Memuat Data");
       }
     };
 

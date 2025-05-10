@@ -1,10 +1,11 @@
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 const Button = ({
   label,
   onclick = () => {},
   href,
   isCurrent = false,
   className = "",
+  
 }) => {
   return (
     <a href={href}>
@@ -15,6 +16,7 @@ const Button = ({
             : "bg-blue-600"
         }`}
         onClick={onclick}
+        
       >
         {label}
       </button>
@@ -23,10 +25,10 @@ const Button = ({
 };
 
 Button.propTypes = {
-  label: propTypes.string.isRequired,
-  onclick: propTypes.func,
-  href: propTypes.string,
-  isCurrent: propTypes.bool,
-  className: propTypes.string,
+  label: PropTypes.string.isRequired,
+  onclick: PropTypes.func,
+  href: PropTypes.string,
+  isCurrent: PropTypes.bool,
+  className: PropTypes.string,
 };
 export default Button;

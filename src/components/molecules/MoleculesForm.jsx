@@ -1,13 +1,21 @@
 import propTypes from "prop-types";
 
-const InputFields = ({ label, placeholder, className, isCurrent = false }) => {
+const InputFields = ({
+  label,
+  placeholder,
+  className,
+  isCurrent = false,
+  type,
+  onChange
+}) => {
   return (
     <div>
-      <label htmlFor={label} className="block text-xl">
+      <label htmlFor={label} className="block text-lg font-thin font-mono ">
         {label}
       </label>
       <input
-        type="text"
+        type={type}
+        onChange={onChange}
         id={label}
         placeholder={placeholder}
         className={`${className} ${
@@ -22,6 +30,8 @@ InputFields.propTypes = {
   label: propTypes.string.isRequired,
   placeholder: propTypes.string.isRequired,
   className: propTypes.string,
+  type: propTypes.string,
+  onChange:propTypes.func,
   isCurrent: propTypes.bool,
 };
 

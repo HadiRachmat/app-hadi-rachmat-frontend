@@ -27,8 +27,7 @@ const PublicAboutPage = () => {
 
         setGetAbout(getAllData);
       } catch (e) {
-        console.log(e.message);
-        alert("couldn't get");
+       window.alert(e, "gagal Memuat Data")
       }
     };
 
