@@ -1,10 +1,62 @@
-import { Form, Radio } from "antd";
+import { Form, message, Radio, Button } from "antd";
 import { useState } from "react";
 import MoleculesFormCreate from "../../../molecules/MoleculesFormCreate";
 import MoleculesTitle from "../../../molecules/MoleculesTitle";
-import Button from "../../../molecules/MoleculesButton";
+import { createHome } from "../../../../services/homePage";
 const OrganismCreateHero = () => {
   const [compenentSize, setComponentSize] = useState("large");
+  const [formHome] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+
+  const fields = [
+    { label: "title", title: "title", type: "text", name: "title" },
+    {
+      label: "description",
+      title: "description",
+      type: "text",
+      name: "description",
+    },
+    {
+      label: "attachment",
+      title: "attachment",
+      type: "file",
+      name: "attachment",
+    },
+  ];
+
+  const onFinish = async (values) => {
+    setLoading(true);
+    const formData = new FormData();
+
+    formData.append("title", values.title);
+    formData.append("description", values.description);
+
+    const file = values.attachment?.[0]?.originFileObj;
+    if (file) {
+      formData.append("attachment", file);
+    }
+    console.log("Attachment:", values.attachment);
+    console.log("File dari attachment:", file);
+    console.log("FormData entries:", [...formData.entries()]);
+    const token = sessionStorage.getItem("accessToken");
+    console.log(token)
+    try {
+      await createHome(formData, {
+        headers: {
+          Authorization:`Bearer ${token}`,
+           'Content-Type': 'multipart/form-data'
+        },
+      });
+      message.success("Data Berhasil Terkirim");
+      formHome.resetFields();
+    } catch (error) {
+      message.error("gagal Mengirim Data");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onChangeSizeComponent = ({ size }) => {
     setComponentSize(size);
   };
@@ -17,6 +69,8 @@ const OrganismCreateHero = () => {
         </div>
         <div>
           <Form
+            form={formHome}
+            onFinish={onFinish}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 20 }}
             layout="horizontal"
@@ -32,12 +86,21 @@ const OrganismCreateHero = () => {
                 <Radio.Button value="large">Large</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <MoleculesFormCreate label="Title" title="Hero" />
-            <MoleculesFormCreate label="Description" title="Description" />
+            {fields.map((field) => (
+              <MoleculesFormCreate
+                key={field.name}
+                label={field.label}
+                title={field.title}
+                type={field.type}
+                name={field.name}
+              />
+            ))}
+            <div className="flex justify-center">
+              <Button type="primary" htmlType={"submit"} disabled={loading}>
+                {loading ? "Mengirim...." : "Create New Data"}
+              </Button>
+            </div>
           </Form>
-        </div>
-        <div className="flex justify-center">
-          <Button label="Create New Data" href={"#"} isCurrent={true}/>
         </div>
       </div>
     </>

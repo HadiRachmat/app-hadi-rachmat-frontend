@@ -14,15 +14,15 @@ const getByIdHome = async () => {
   return request;
 };
 
-const createHome = async () => {
-  let uri = `/api/admin/home`;
-  const request = await API.post(uri);
+const createHome = async (formData, config= {}) => {
+  let uri = `/api/admin/home/create`;
+  const request = await API.post(uri, formData, config);
   return request;
 };
 
-const updateHome = async () => {
+const updateHome = async (formData, config= {}) => {
   let uri = `/api/admin/home/:id`;
-  const request = await API.put(uri);
+  const request = await API.put(uri, formData, config);
   return request;
 };
 

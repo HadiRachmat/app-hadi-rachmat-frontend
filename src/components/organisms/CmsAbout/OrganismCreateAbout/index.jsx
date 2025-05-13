@@ -10,8 +10,18 @@ const OrganismCreateAbout = () => {
 
   const fields = [
     { label: "title", title: "title", type: "text", name: "title" },
-    { label: "description", title: "description", type: "text", name: "description" },
-    { label: "attachment", title: "attachment", type: "file", name: "attachment" }
+    {
+      label: "description",
+      title: "description",
+      type: "text",
+      name: "description",
+    },
+    {
+      label: "attachment",
+      title: "attachment",
+      type: "file",
+      name: "attachment",
+    },
   ];
 
   const onFinish = async (values) => {
@@ -20,14 +30,12 @@ const OrganismCreateAbout = () => {
 
     formData.append("title", values.title);
     formData.append("description", values.description);
-    console.log("Title:", values.title);
-    console.log("Description:", values.description);
+
     const file = values.attachment?.[0]?.originFileObj;
     if (file) {
       formData.append("attachment", file);
     }
-    console.log(file)
-    console.log("FormData:", [...formData.entries()]);
+
     const token = sessionStorage.getItem("accessToken");
     try {
       await createAbout(formData, {
@@ -77,14 +85,14 @@ const OrganismCreateAbout = () => {
                 </Radio.Group>
               </Form.Item>
               {fields.map((field) => (
-            <MoleculesFormCreate
-              key={field.name}
-              label={field.label}
-              title={field.title}
-              type={field.type}
-              name={field.name}
-            />
-          ))}
+                <MoleculesFormCreate
+                  key={field.name}
+                  label={field.label}
+                  title={field.title}
+                  type={field.type}
+                  name={field.name}
+                />
+              ))}
               <div className="flex justify-center">
                 <Button type="primary" htmlType={"submit"} disabled={loading}>
                   {loading ? "Mengirim ..." : "Create New Data"}
