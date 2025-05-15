@@ -3,10 +3,12 @@ import { useState } from "react";
 import MoleculesFormCreate from "../../../molecules/MoleculesFormCreate";
 import MoleculesTitle from "../../../molecules/MoleculesTitle";
 import { createHome } from "../../../../services/homePage";
+import { useNavigate } from "react-router-dom";
 const OrganismCreateHero = () => {
   const [compenentSize, setComponentSize] = useState("large");
   const [formHome] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const fields = [
     { label: "title", title: "title", type: "text", name: "title" },
@@ -35,11 +37,7 @@ const OrganismCreateHero = () => {
     if (file) {
       formData.append("attachment", file);
     }
-    console.log("Attachment:", values.attachment);
-    console.log("File dari attachment:", file);
-    console.log("FormData entries:", [...formData.entries()]);
     const token = sessionStorage.getItem("accessToken");
-    console.log(token)
     try {
       await createHome(formData, {
         headers: {
@@ -49,6 +47,7 @@ const OrganismCreateHero = () => {
       });
       message.success("Data Berhasil Terkirim");
       formHome.resetFields();
+      navigate("/cms/hero")
     } catch (error) {
       message.error("gagal Mengirim Data");
       console.log(error);

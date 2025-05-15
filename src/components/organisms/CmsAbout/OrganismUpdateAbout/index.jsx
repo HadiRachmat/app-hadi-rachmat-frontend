@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Form, Button, message } from "antd";
-import { getByIdHome, updateHome } from "../../../../services/homePage";
-import PropTypes from "prop-types";
+import { getByIdAbout, updateAbout } from "../../../../services/aboutPage";
 import MoleculesFormUpdate from "../../../molecules/MoleculesFormUpdate";
+import PropTypes from "prop-types";
 
-const OrganismUpdateHero = ({ id }) => {
+const OrganismUpdateAbout = ({ id }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  // const [initialFields, setInitialFields] = useState(null);
   const [fileList, setFileList] = useState([]);
 
   const fields = [
@@ -30,62 +29,62 @@ const OrganismUpdateHero = ({ id }) => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAbout = async () => {
       if (!id) {
-        console.warn("ID belum tersedia");
-        return;
+        message.error("id belum tersedia");
+        //   navigate("/cms/about");
       }
+
       try {
         const token = sessionStorage.getItem("accessToken");
-        const res = await getByIdHome(id, {
+        const response = await getByIdAbout(id, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        const data = res.data;
-        form.setFieldsValue({
-          title: data.data.home.title,
-          description: data.data.home.description,
+        const data = response.data;
+        form.setFieldValue({
+          title: data.data.about.title,
+          description: data.data.about.description,
         });
 
         if (data.data.attachment?.link) {
           setFileList([
-            {
-              uid: "-1",
-              name: "file",
-              status: "done",
-              url: data.data.attachment.link,
-            },
+           { uid: "-1",
+            name: "file",
+            status: "done",
+            url: data.data.attachment.link,}
           ]);
         }
       } catch (e) {
-        message.error("gagal mengambil data ");
+        message.error("gagal mengambil data");
         console.log(e);
       }
     };
-    fetchData();
+    fetchDataAbout();
   }, [id, form]);
 
   const onFinish = async (values) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("description", values.description);
+    const formDataAbout = new FormData();
+    formDataAbout.append("title", values.title);
+    formDataAbout.append("description", values.description);
     if (fileList.length > 0 && fileList[0].originFileObj) {
-      formData.append("file", fileList[0].originFileObj);
+      formDataAbout.append("attachment", fileList[0].originFileObj);
     }
+
     try {
       setLoading(true);
       const token = sessionStorage.getItem("accessToken");
-      await updateHome(id, formData, {
+      await updateAbout(id, formDataAbout, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      message.success("Data Berhasil Di Update");
-      navigate("/cms/hero")
+      message.success("Data Berhasil Di Update ");
+      navigate("/cms/about");
     } catch (e) {
       console.log(e);
-      message.error("data Gagal di Update");
+      message.error("gagal Update Data ");
     } finally {
       setLoading(false);
     }
@@ -101,13 +100,13 @@ const OrganismUpdateHero = ({ id }) => {
       onFinish={onFinish}
       style={{ maxWidth: 600, margin: "0 auto" }}
     >
-      {fields.map((field) => (
+      {fields.map((ssss) => (
         <MoleculesFormUpdate
-          key={field.name}
-          label={field.label}
-          title={field.title}
-          type={field.type}
-          name={field.name}
+          key={ssss.name}
+          label={ssss.label}
+          title={ssss.title}
+          type={ssss.type}
+          name={ssss.name}
           fileList={fileList}
           setFileList={setFileList}
         />
@@ -126,7 +125,7 @@ const OrganismUpdateHero = ({ id }) => {
     </Form>
   );
 };
-OrganismUpdateHero.propTypes = {
+OrganismUpdateAbout.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
-export default OrganismUpdateHero;
+export default OrganismUpdateAbout;

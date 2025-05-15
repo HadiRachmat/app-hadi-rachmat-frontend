@@ -8,9 +8,9 @@ const getAllHome = async () => {
   return request.data;
 };
 
-const getByIdHome = async () => {
-  let uri = `/api/admin/home/:id`;
-  const request = await API.get(uri);
+const getByIdHome = async (id, config = {}) => {
+  let uri = `/api/admin/home/${id}`;
+  const request = await API.get(uri, config);
   return request;
 };
 
@@ -20,15 +20,15 @@ const createHome = async (formData, config= {}) => {
   return request;
 };
 
-const updateHome = async (formData, config= {}) => {
-  let uri = `/api/admin/home/:id`;
+const updateHome = async (id, formData, config= {}) => {
+  let uri = `/api/admin/home/${id}`;
   const request = await API.put(uri, formData, config);
   return request;
 };
 
-const removeHome = async () => {
-  let uri = `/api/admin/home/:id`;
-  const request = await API.delete(uri);
+const removeHome = async (id, config = {}) => {
+  let uri = `/api/admin/home/${id}`;
+  const request = await API.delete(uri, config);
   return request;
 };
 

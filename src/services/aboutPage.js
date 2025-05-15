@@ -8,9 +8,9 @@ const getAllAbout = async () => {
   return request.data;
 };
 
-const getByIdAbout = async () => {
-  let uri = `/api/admin/about/:id`;
-  const request = await API.get(uri);
+const getByIdAbout = async (id,config = {}) => {
+  let uri = `/api/admin/about/${id }`;
+  const request = await API.get(uri, config);
   return request;
 };
 
@@ -20,9 +20,9 @@ const createAbout = async (formData, config ={}) => {
   return request;
 };
 
-const updateAbout = async () => {
-  let uri = `/api/admin/about/:id`;
-  const request = await API.put(uri);
+const updateAbout = async (id, formData, config) => {
+  let uri = `/api/admin/about/${id}`;
+  const request = await API.put(uri, formData, config);
   return request;
 };
 

@@ -5,25 +5,38 @@ const MoleculesTitle = () => {
 
   const generatePageTitle = () => {
     const path = location.pathname.split("/").filter(Boolean);
-    const lastPath = path[path.length - 1];
-    const secondLastPath = path[path.length - 2];
 
-    if (lastPath === "create") {
-      const title =
-        secondLastPath?.charAt(0).toUpperCase() + secondLastPath?.slice(1);
-      return `Create ${title}`;
+    const hasCreate = path.includes("create");
+    const hasUpdate = path.includes("update");
+
+    let titleEntity = "";
+
+    if (hasCreate || hasUpdate) {
+      // Ambil nama entity sebelum "create" atau "update"
+      const index = path.findIndex((p) => p === "create" || p === "update");
+      titleEntity = path[index - 1];
     } else {
-      const title = lastPath.charAt(0).toUpperCase() + lastPath.slice(1);
-      return ` List of ${title}`;
+      titleEntity = path[path.length - 1];
     }
-    /**( title update page is not yet to do) */
+
+    const capitalizedTitle =
+      titleEntity.charAt(0).toUpperCase() + titleEntity.slice(1);
+
+    if (hasCreate) {
+      return `Create ${capitalizedTitle}`;
+    } else if (hasUpdate) {
+      return `Update ${capitalizedTitle}`;
+    } else {
+      return `List of ${capitalizedTitle}`;
+    }
   };
+
   return (
-    <>
     <div className="p-5 py-7">
-      <h1 className="font-bold text-3xl uppercase">{generatePageTitle()} Management</h1>
+      <h1 className="font-bold text-3xl uppercase">
+        {generatePageTitle()} Management
+      </h1>
     </div>
-    </>
   );
 };
 
