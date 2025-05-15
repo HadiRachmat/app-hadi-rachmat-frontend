@@ -100,13 +100,13 @@ const OrganismUpdateAbout = ({ id }) => {
       onFinish={onFinish}
       style={{ maxWidth: 600, margin: "0 auto" }}
     >
-      {fields.map((ssss) => (
+      {fields.map((field) => (
         <MoleculesFormUpdate
-          key={ssss.name}
-          label={ssss.label}
-          title={ssss.title}
-          type={ssss.type}
-          name={ssss.name}
+          key={field.name}
+          label={field.label}
+          title={field.title}
+          type={field.type}
+          name={field.name}
           fileList={fileList}
           setFileList={setFileList}
         />

@@ -26,9 +26,9 @@ const updateAbout = async (id, formData, config) => {
   return request;
 };
 
-const removeAbout = async () => {
-  let uri = `/api/admin/about/:id`;
-  const request = await API.delete(uri);
+const removeAbout = async (id, config = {}) => {
+  let uri = `/api/admin/about/${id}`;
+  const request = await API.delete(uri, config);
   return request;
 };
 
